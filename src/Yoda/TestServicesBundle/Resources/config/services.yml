@@ -1,0 +1,10 @@
+services:
+#    test_services.example:
+#        class: Yoda\TestServicesBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+    testservice.firsttestservice:
+        class: Yoda\TestServicesBundle\Services\TestService
+
+  #  app.mailer:
+   #     class:        Yoda\TestServicesBundle\Mailer
+    #    arguments:    [sendmail]

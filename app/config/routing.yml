@@ -1,0 +1,24 @@
+test_services:
+    resource: "@TestServicesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+# will do route annotations from entire Controller dir
+user_controller:
+    resource: "@UserBundle/Controller"
+    prefix: /
+    type: annotation
+
+
+#needed this for report, how to do by single controller only?
+report:
+    resource: "@EventBundle/Controller"
+    prefix: /
+    type: annotation
+
+
+

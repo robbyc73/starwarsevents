@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% if block('title') %}
+                   {{  block('title') }} | Events
+                  {% else %}
+                      Other Event
+                    {%  endif  %}</title>
+        {% block stylesheets %}
+           <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+            {% stylesheets
+            'css/vendor/semantic-ui/semantic.min.css'
+            'css/dev/app.css'
+            'bundles/event/css/event.css'
+            'bundles/event/css/events.css'
+            'bundles/event/css/main.css'
+            filter='?uglifycss'
+            filter='cssrewrite'
+            output='css/built/app.css'
+            %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+    {% block body %}{% endblock %}
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% block javascripts %}
+       <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        {% javascripts
+        'js/vendor/semantic-ui/semantic.min.js'
+        'js/dev/app.js'
+        filter='uglifyjs2'
+        output='js/built/app.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+    </body>
+</html>

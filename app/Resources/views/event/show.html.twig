@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Event</h1>
+
+    <table>
+        <tbody>
+  <!--          <tr>
+                <th>Id</th>
+                <td>{{ event.slug }}</td>
+            </tr>-->
+            <tr>
+                <th>Name</th>
+                <td>{{ event.name }}</td>
+            </tr>
+            <tr>
+                <th>Time</th>
+                <td>{% if event.time %}{{ event.time|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ event.location }}</td>
+            </tr>
+            <tr>
+                <th>Details</th>
+                <td>{{ event.details }}</td>
+            </tr>
+  <tr>
+      <th>Number of Attendees</th>
+      <td class="number-attendees"> {{ event.attendees|length }}</td>
+  </tr>
+        {% for attendee in event.attendees %}
+        <tr><th>Atendee</th>
+            <td>{{ attendee.username }}</td>
+            {% else %}
+                <td>Were cool</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('event_index') }}">Back to the list</a>
+        </li>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if event.hasAttendee(app.user) %}
+        <li>
+            <a href="{{ path('event_unattend', { 'id': event.id }) }}" class="js-attend-toggle"> Un Attend</a>
+        </li>
+        {% else %}
+            <li>
+                <a href="{{ path('event_attend', { 'id': event.id }) }}" class="js-attend-toggle"> Attend</a>
+            </li>
+        {% endif %}
+        {% endif %}
+        {% if app.user == event.owner %}
+        <li>
+            <a href="{{ path('event_edit', { 'slug': event.slug }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+        {% endif %}
+    </ul>
+{% endblock %}

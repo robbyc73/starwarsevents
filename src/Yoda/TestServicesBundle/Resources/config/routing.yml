@@ -1,0 +1,3 @@
+test_services_homepage:
+    path:     /testservice
+    defaults: { _controller: TestServicesBundle:Default:index }

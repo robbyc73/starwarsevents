@@ -1,0 +1,17 @@
+services:
+#    event.example:
+#        class: Yoda\EventBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+
+#create the event_report_manager as a service, and pass another service, the entity manager as an arg, prefix arg with @
+    event_report_manager:
+        class: Yoda\EventBundle\Reporting\EventReportManager
+        arguments: ["@doctrine.orm.entity_manager","@router"]
+
+
+  #  twig.event_extension:
+   #     class: Yoda\EventBundle\Twig\EventExtension
+    #    arguments: []
+     #   tags:
+      #      - { name: twig.extension }
+
